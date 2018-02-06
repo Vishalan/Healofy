@@ -9,7 +9,7 @@ export class ChatService {
 
   getChatByRoom(room) {
     return new Promise((resolve, reject) => {
-      this.http.get('/chat/' + room)
+      this.http.get('/chat/room/' + room)
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);

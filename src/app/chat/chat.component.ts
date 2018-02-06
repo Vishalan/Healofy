@@ -37,8 +37,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.socket.on('old-message', function (data) {
       if(data.message.room === JSON.parse(localStorage.getItem("user")).room) {
         for (var i = 0; i < this.chats.length; i++) {
-          if (this.chats[i]._id === data._id) {
-            this.chats[i] = data;
+          if (String(this.chats[i]._id) === String(data.message._id)){
+            this.chats[i] = data.message;
             break;
           }
         }
@@ -96,7 +96,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     chat.liked_by.push({name: user.nickname});
     chat.liked_count = chat.liked_count + 1;
     this.chatService.updateChat(chat._id.toString(), chat).then((result) => {
-      this.socket.emit('update-message', result);
+      this.socket.emit('update-message', chat);
     }, (err) => {
       console.log(err);
     });

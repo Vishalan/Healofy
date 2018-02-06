@@ -29,7 +29,7 @@ io.on('connection', function (socket) {
 });
 
 /* GET ALL CHATS */
-router.get('/:room', function(req, res, next) {
+router.get('/room/:room', function(req, res, next) {
   Chat.find({ room: req.params.room }, function (err, chats) {
     if (err) return next(err);
     res.json(chats);

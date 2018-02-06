@@ -26,8 +26,8 @@
                                 <button type="button" class="btn btn-default btn-sm" (click)="likeMessage(c)" [disabled]="checkAlreadyClicked(c)">
                                   <span class="glyphicon glyphicon-thumbs-up"></span> {{ c.liked_count }}
                                 </button>
-                                <ul id="liked">
-                                <li *ngFor="let likes of c.liked_by" style="font-size:10px">
+                                <ul id="liked"  style="font-size:10px">
+                                <li *ngFor="let likes of c.liked_by">
                                   {{ likes.name }}
                                 </li>
                                 </ul>
@@ -47,8 +47,8 @@
                                   <button type="button" class="btn btn-default btn-sm" (click)="likeMessage(c)" [disabled]="checkAlreadyClicked(c)">
                                     <span class="glyphicon glyphicon-thumbs-up"></span> {{ c.liked_count }}
                                   </button>
-                                  <ul id="liked">
-                                  <li *ngFor="let likes of c.liked_by" style="font-size:10px">
+                                  <ul id="liked" style="font-size:10px">
+                                  <li *ngFor="let likes of c.liked_by">
                                     {{ likes.name }}
                                   </li>
                                   </ul>

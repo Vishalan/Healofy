@@ -4,15 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
-mongoose.Promise = global.Promise;
-
-mongoose.connect('mongodb://localhost/mean-chat')
-  .then(() =>  console.log('connection successful'))
-  .catch((err) => console.error(err));
-
+// *** config file *** //
+var config = require('./_config');
 var chat = require('./routes/chat');
 var app = express();
+mongoose.Promise = global.Promise;
+
+mongoose.connect(config.mongoURI[app.settings.env])
+  .then(() =>  console.log('connection successful'))
+  .catch((err) => console.error(err));
 
 app.set('view engine', 'html');
 app.use(logger('dev'));
