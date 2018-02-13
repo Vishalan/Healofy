@@ -7,6 +7,19 @@ export class ChatService {
 
   constructor(private http: Http) { }
 
+  getChatEnum()
+  {
+    return new Promise((resolve, reject) => {
+      this.http.get('/chat/roomnames/room')
+        .map(res => res.json())
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   getChatByRoom(room) {
     return new Promise((resolve, reject) => {
       this.http.get('/chat/room/' + room)

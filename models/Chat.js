@@ -1,7 +1,11 @@
+
 var mongoose = require('mongoose');
 
+var roomEnum = ['Java','JavaScript', 'Python','Scala'];
+
+
 var ChatSchema = new mongoose.Schema({
-  room: String,
+  room: {String, enum: roomEnum},
   nickname: String,
   message: String,
   updated_at: { type: Date, default: Date.now },

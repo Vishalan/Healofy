@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild,Pipe, PipeTransform } from '@angular/core';
 import { ChatService } from '../chat.service';
+import {RoomEnum} from '../../../models/enums/RoomEnum';
 import * as io from "socket.io-client";
 
 @Component({
@@ -16,10 +17,20 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   newUser = { nickname: '', room: '' };
   msgData = { room: '', nickname: '', message: '',liked_count:0,liked_by:[] };
   socket = io('http://localhost:4000');
+  // chatEnum = RoomEnum;
+  chatEnum: any;
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService) {
+  }
 
   ngOnInit() {
+    
+    this.chatService.getChatEnum().then((result) => {
+      this.chatEnum = result;
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });
     var user = JSON.parse(localStorage.getItem("user"));
     if(user!==null) {
       this.getChatByRoom(user.room);
@@ -112,4 +123,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     return false;
   }
 
+
 }
+// @Pipe({
+//   name: 'enumToArray'
+// })
+// export class EnumToArrayPipe implements PipeTransform {
+//   transform(data: Object) {
+//     const keys = Object.keys(data);
+//     return keys.slice(keys.length / 2);
+//   }
+// }

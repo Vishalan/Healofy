@@ -68,4 +68,8 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
+router.get('/roomnames/room', function(req, res, next) {
+    res.json(Chat.schema.path('room.enum').options);
+});
+
 module.exports = router;
